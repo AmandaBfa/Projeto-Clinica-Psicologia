@@ -1,0 +1,78 @@
+Entrevista 1 — Karla Niana
+Clínica Espaço Terapêutico
+Data: 29/03/2026
+
+Segmento de atuação:
+Clínica multidisciplinar para atendimento de desenvolvimento atípico.
+Equipe:
+3 médicas, 3 psicólogas, 1 fonoaudióloga, 1 fisioterapeuta, 1 terapeuta, 1 assistente e 1 secretária.
+Visão para os próximos 12 meses:
+Estar no top 10 do segmento, ampliar na mesma área, ter mais salas, mais atendimentos e mais pacientes.
+
+Principais objetivos para o sistema:
+
+Atendimento geral e organização das rotinas da clínica;
+Correção de laudos manuais (ex: TDAH) e conversão para estatísticas;
+Gestão de agenda considerando disponibilidade do profissional, horário da mãe e disponibilidade da sala, sem sobreposições;
+Geração de orçamentos e emissão de recibos;
+Lançamento de presença (quem foi e quem não foi);
+Prontuários com modelos prontos para alimentação pelos profissionais;
+Controle financeiro de pagamentos parcelados sem alimentação manual;
+Controle de atendimento com registro de profissional, horário e assinatura presencial da mãe;
+Regra: não entregar laudos sem pagamento fechado;
+Estatísticas da clínica: atendimentos, cancelamentos, serviços solicitados, profissionais e ocorrências.
+
+
+O que o sistema está autorizado a fazer:
+
+Gerar links de pagamento;
+Responder dúvidas frequentes e informar sobre serviços;
+Integrar com calendário;
+Criar e gerenciar agendamentos;
+Enviar lembretes de consultas;
+Realizar follow-up pós-consulta;
+Coletar feedback dos pacientes;
+Gerenciar cancelamentos e reagendamentos;
+Encaminhar para atendimento humano quando necessário;
+Emitir cobranças automáticas e gerar relatórios financeiros.
+
+
+Ferramentas para integração:
+WhatsApp, Instagram, e-mail, Google Calendar, sistema de pagamento (cartão) e planilhas existentes.
+
+Agendamentos:
+
+Duração dos serviços: de 40 minutos a 1 hora;
+Agendamentos fixos durante todo o período de avaliação e intervenção até o fim do tratamento;
+O sistema deve priorizar sessões sequenciais no mesmo dia (ex: Fono + Psicologia) para facilitar a logística dos responsáveis;
+Feriados: não há atendimento;
+Em caso de falta do profissional: cancela e reagenda, com comunicação feita pela secretária.
+
+
+Laudos e prontuários:
+
+A IA organiza o rascunho do laudo com base nas informações alimentadas pelo profissional e dados fornecidos pela mãe;
+Existe status de "Aguardando Revisão Clínica" antes da entrega final;
+Vários profissionais podem acessar o prontuário do mesmo paciente.
+
+
+Financeiro e pagamentos:
+
+Atendimento exclusivamente particular, com emissão de recibo (não nota fiscal) para reembolso no plano de saúde;
+Métodos aceitos: cartão de crédito, transferência bancária e Pix;
+Consultas avulsas: pagamento antecipado ou no cartão;
+Tratamentos contínuos: entrada no início e quitação do restante ao final;
+A clínica trabalha com descontos.
+
+
+Inadimplência:
+Casos raros. O sistema não bloqueia novos agendamentos automaticamente, mas não deixa de emitir cobranças.
+
+Cancelamentos:
+Não há política formal atualmente, mas planeja-se cobrar automaticamente sessões canceladas com menos de 24 horas de antecedência.
+
+Salas:
+2 consultórios e 1 sala multidisciplinar (com brinquedos). O sistema deve controlar a ocupação de cada sala além da agenda do profissional.
+
+Controle de presença:
+A assinatura da mãe é feita presencialmente, sendo importante para verificar estatísticas e evolução das etapas do tratamento.
