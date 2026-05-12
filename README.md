@@ -89,9 +89,23 @@ Primeira entrega do projeto, focada na elicitação, análise e documentação i
 
 ---
 
-### Entrega 2 - Modelagem e Análise *(em breve)*
+### Entrega 2 - Modelagem e Análise 🚧 Em andamento
 
-> Esta seção será preenchida na próxima entrega do projeto.
+**Status da Entrega 2 — Modelagem & Análise**
+
+- [ ] Documento de Visão (Amanda)
+- [ ] VPC Karla (Amanda) + VPC Marla (Pedro)
+- [ ] Diagrama de Casos de Uso (Pedro)
+- [ ] UC01 Agendar Consulta (Amanda)
+- [ ] UC02 Manter Prontuário (Igor)
+- [ ] UC03 Registrar Atendimento e Recibo (João Pedro)
+- [ ] UC04 Enviar Lembrete (Mateus)
+- [ ] UC05 Gerar Relatório (Pedro)
+- [ ] Especificação Suplementar ISO 25010 (Igor)
+- [ ] MER + Dicionário de Dados (João Pedro)
+- [ ] Matriz de Rastreabilidade v2 (João Pedro)
+- [ ] Protótipos Figma (Mateus + Pedro)
+- [ ] ERS v2 IEEE 830 (Igor) + EOR v2 (Mateus)
 
 ---
 
