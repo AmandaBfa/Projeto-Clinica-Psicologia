@@ -1,0 +1,30 @@
+@startuml C3_Sequencia_Componentes
+' Nível C3 — Diagrama de Sequência (mensagens ENTRE COMPONENTES)
+' Caso: Agendar consulta (autoagendamento)
+' Autor: Mateus Lucas Prado Amorim
+skinparam monochrome true
+skinparam shadowing false
+
+actor Paciente
+participant "Web SPA" as UI
+participant "AgendamentoController" as C
+participant "AgendamentoService" as S
+participant "AgendaPolicy" as P
+participant "AgendamentoRepository" as R
+participant "LembreteService" as L
+participant "AuditLogger" as A
+
+Paciente -> UI : escolher horário
+UI -> C : POST /agendamentos
+C -> S : criarAgendamento(dados)
+S -> P : verificarDisponibilidade(prof, sala, paciente, horario)
+P --> S : disponível
+S -> R : salvar(agendamento)
+R --> S : agendamento{id}
+S -> L : programarLembrete(agendamento)
+L --> S : ok
+S -> A : registrar("CREATE", "Agendamento", id)
+S --> C : agendamento criado
+C --> UI : 201 Created
+UI --> Paciente : confirmação
+@enduml

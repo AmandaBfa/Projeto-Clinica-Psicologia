@@ -1,0 +1,35 @@
+@startuml BPMN_Agendamento
+' Processo de negócio: Agendar consulta (autoagendamento) — notação de atividade/BPMN
+' Autor: Mateus Lucas Prado Amorim
+title Processo de Negócio — Agendar Consulta
+
+|Paciente|
+start
+:Solicitar agendamento;
+:Informar profissional/especialidade;
+:Informar período desejado;
+
+|Sistema|
+:Verificar disponibilidade conjunta\n(profissional + sala + paciente);
+if (Há horário livre?) then (sim)
+  |Paciente|
+  :Escolher horário;
+  |Sistema|
+  if (Slot ainda disponível?) then (sim)
+    :Reservar horário\n(profissional + sala + paciente);
+    :Criar agendamento (status = AGENDADO);
+    :Programar lembrete;
+    |Paciente|
+    :Receber confirmação;
+    stop
+  else (não — concorrência)
+    :Informar indisponibilidade;
+    |Sistema|
+    :Reapresentar horários;
+    detach
+  endif
+else (não)
+  :Sugerir período mais próximo\nou lista de espera;
+  stop
+endif
+@enduml

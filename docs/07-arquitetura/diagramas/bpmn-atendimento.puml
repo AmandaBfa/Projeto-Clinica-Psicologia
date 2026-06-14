@@ -1,0 +1,30 @@
+@startuml BPMN_Atendimento
+' Processo de negócio: Registrar atendimento + evolução do prontuário
+' Autor: Mateus Lucas Prado Amorim
+title Processo de Negócio — Registrar Atendimento e Evolução
+
+|Profissional|
+start
+:Selecionar atendimento do dia;
+|Sistema|
+:Apresentar dados do agendamento;
+|Profissional|
+if (Paciente compareceu?) then (sim)
+  :Confirmar presença, duração e observações;
+  |Sistema|
+  :Atualizar agendamento (REALIZADO);
+  :Registrar auditoria;
+  |Profissional|
+  :Registrar evolução clínica\n(tipo, texto/conduta);
+  |Sistema|
+  :Salvar evolução (append-only)\nvinculada a prontuário/data/profissional;
+  :Criptografar e registrar auditoria;
+  stop
+else (não)
+  :Marcar falta;
+  |Sistema|
+  :Atualizar agendamento (FALTOU);
+  :Registrar auditoria\n(alimenta relatório de no-show);
+  stop
+endif
+@enduml

@@ -1,0 +1,36 @@
+@startuml BPMN_Lembrete
+' Processo de negócio: Enviar lembrete automático (agendador interno - Observer)
+' Autor: Mateus Lucas Prado Amorim
+title Processo de Negócio — Enviar Lembrete Automático
+
+|Agendador (Sistema)|
+start
+:Acionar periodicamente (a cada 1 min);
+:Buscar lembretes pendentes\n(agendar_para <= agora);
+if (Há lembrete pendente?) then (sim)
+  :Renderizar template com dados\ndo agendamento e paciente;
+  :Enviar pelo canal (WhatsApp/E-mail);
+  if (Provedor aceitou?) then (sim)
+    :Marcar ENVIADO;
+    |Paciente|
+    :Receber lembrete;
+    if (Responde?) then (confirma)
+      |Sistema|
+      :Atualizar agendamento (CONFIRMADO);
+      stop
+    else (cancela)
+      |Sistema|
+      :Validar antecedência e cancelar;
+      :Liberar horário;
+      stop
+    endif
+  else (falha)
+    |Agendador (Sistema)|
+    :Reagendar (até 3 tentativas, backoff);
+    stop
+  endif
+else (não)
+  :Encerrar ciclo;
+  stop
+endif
+@enduml
