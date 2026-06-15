@@ -1,0 +1,30 @@
+@startuml C4_Seq_registrarEvolucao
+' Nível C4 — Diagrama de Sequência da OPERAÇÃO ProntuarioService.registrarEvolucao()
+' Autor: Pedro Lourençoni Lima
+skinparam monochrome true
+skinparam shadowing false
+
+participant ":ProntuarioController" as C
+participant ":ProntuarioService" as S
+participant ":EvolucaoRepository" as R
+participant ":AnexoStorage" as A
+participant ":AuditLogger" as Log
+
+C -> S : registrarEvolucao(pacId, profId, dados)
+activate S
+S -> S : validarVinculo(profId, pacId)
+opt possui anexos
+  S -> A : armazenar(arquivo)
+  activate A
+  A --> S : uri
+  deactivate A
+end
+S -> S : e = new Evolucao(dados, profId, agora)
+S -> R : salvar(e)
+activate R
+R --> S : e{id}
+deactivate R
+S -> Log : registrar("CREATE", "Evolucao", e.id)
+S --> C : e
+deactivate S
+@enduml

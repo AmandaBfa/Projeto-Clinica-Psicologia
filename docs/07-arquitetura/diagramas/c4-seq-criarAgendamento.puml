@@ -1,0 +1,32 @@
+@startuml C4_Seq_criarAgendamento
+' Nível C4 — Diagrama de Sequência da OPERAÇÃO AgendamentoService.criarAgendamento()
+' Autor: Pedro Lourençoni Lima
+skinparam monochrome true
+skinparam shadowing false
+
+participant ":AgendamentoController" as C
+participant ":AgendamentoService" as S
+participant ":AgendaPolicy" as P
+participant ":AgendamentoRepository" as R
+participant ":LembreteService" as L
+
+C -> S : criarAgendamento(dados)
+activate S
+S -> P : verificarDisponibilidade(prof, sala, pac, inicio, fim)
+activate P
+P -> P : haConflito(prof) / haConflito(sala) / haConflito(pac)
+P --> S : true (disponível)
+deactivate P
+alt disponível
+  S -> S : a = new Agendamento(dados, AGENDADO)
+  S -> R : salvar(a)
+  activate R
+  R --> S : a{id}
+  deactivate R
+  S -> L : programarLembrete(a)
+  S --> C : a
+else indisponível
+  S --> C : erro "horário indisponível"
+end
+deactivate S
+@enduml

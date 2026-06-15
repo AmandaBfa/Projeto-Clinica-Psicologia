@@ -1,0 +1,58 @@
+@startuml C3_Diagrama_Componentes
+' Nível C3 — Diagrama de Componentes (por pacote de domínio)
+' Autor: Pedro Lourençoni Lima
+skinparam monochrome true
+skinparam shadowing false
+
+package "Agendamento" {
+  [AgendamentoController] as AgC
+  [AgendamentoService] as AgS
+  [AgendaPolicy\n(regras de conflito)] as AgP
+  [AgendamentoRepository] as AgR
+  AgC --> AgS
+  AgS --> AgP
+  AgS --> AgR
+}
+
+package "Atendimento e Prontuário" {
+  [ProntuarioController] as PrC
+  [ProntuarioService] as PrS
+  [EvolucaoRepository] as PrR
+  [AnexoStorage] as PrA
+  PrC --> PrS
+  PrS --> PrR
+  PrS --> PrA
+}
+
+package "Comunicação" {
+  [LembreteScheduler] as LSc
+  [LembreteService] as LSv
+  [WhatsAppGateway] as WG
+  [EmailGateway] as EG
+  LSc --> LSv
+  LSv --> WG
+  LSv --> EG
+}
+
+package "Identidade e Acesso" {
+  [AuthService] as Au
+  [RBACService] as RB
+}
+
+package "Infraestrutura" {
+  [AuditLogger] as AL
+  database "PostgreSQL" as DB
+}
+
+' Interfaces / dependências entre componentes
+AgS ..> LSv : programa lembrete
+PrS ..> AgS : consulta atendimento
+AgR --> DB
+PrR --> DB
+AgS ..> AL : audita
+PrS ..> AL : audita
+AgC ..> Au : autentica
+AgC ..> RB : autoriza
+WG --> [WhatsApp Business API]
+EG --> [Servidor SMTP]
+@enduml
