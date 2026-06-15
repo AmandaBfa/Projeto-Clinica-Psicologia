@@ -1,0 +1,53 @@
+@startuml C4_Classes_Agendamento
+' Nível C4 — Diagrama de Classes do componente Agendamento
+' Autor: João Pedro Gonçalves Ferreira
+skinparam monochrome true
+skinparam shadowing false
+
+class AgendamentoController {
+  +criar(req): Resposta
+  +cancelar(id): Resposta
+}
+
+class AgendamentoService {
+  +criarAgendamento(dados): Agendamento
+  +cancelar(id, motivo): void
+  +listarPorProfissional(profId, periodo): List<Agendamento>
+}
+
+class AgendaPolicy {
+  +verificarDisponibilidade(profId, salaId, pacId, inicio, fim): boolean
+  +haConflito(recursoId, inicio, fim): boolean
+}
+
+class AgendamentoRepository {
+  +salvar(a: Agendamento): Agendamento
+  +buscarPorId(id): Agendamento
+  +buscarConflitos(recursoId, inicio, fim): List<Agendamento>
+}
+
+class Agendamento {
+  -id: UUID
+  -inicio: DateTime
+  -fim: DateTime
+  -modalidade: Modalidade
+  -tipoSessao: TipoSessao
+  -status: StatusAgendamento
+  +confirmar(): void
+  +cancelar(): void
+}
+
+enum StatusAgendamento {
+  AGENDADO
+  CONFIRMADO
+  REALIZADO
+  CANCELADO
+  FALTOU
+}
+
+AgendamentoController --> AgendamentoService
+AgendamentoService --> AgendaPolicy
+AgendamentoService --> AgendamentoRepository
+AgendamentoRepository --> Agendamento
+Agendamento --> StatusAgendamento
+@enduml

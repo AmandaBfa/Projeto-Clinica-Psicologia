@@ -1,0 +1,47 @@
+@startuml C4_Classes_Prontuario
+' Nível C4 — Diagrama de Classes do componente Atendimento e Prontuário
+' Autor: João Pedro Gonçalves Ferreira
+skinparam monochrome true
+skinparam shadowing false
+
+class ProntuarioController {
+  +registrarEvolucao(req): Resposta
+  +exportar(id): Resposta
+}
+
+class ProntuarioService {
+  +registrarEvolucao(pacId, profId, dados): Evolucao
+  +abrirProntuario(pacId, profId): Prontuario
+  +listarEvolucoes(pacId): List<Evolucao>
+}
+
+class EvolucaoRepository {
+  +salvar(e: Evolucao): Evolucao
+  +listarPorProntuario(prontId): List<Evolucao>
+}
+
+class AnexoStorage {
+  +armazenar(arquivo): URI
+  +recuperar(uri): Arquivo
+}
+
+class Prontuario {
+  -id: UUID
+  -abertoEm: DateTime
+  -encerradoEm: DateTime
+}
+
+class Evolucao {
+  -id: UUID
+  -tipo: TipoEvolucao
+  -texto: String
+  -registradoEm: DateTime
+  +corrigir(nova: Evolucao): void
+}
+
+ProntuarioController --> ProntuarioService
+ProntuarioService --> EvolucaoRepository
+ProntuarioService --> AnexoStorage
+Prontuario "1" --> "0..*" Evolucao
+EvolucaoRepository --> Evolucao
+@enduml
